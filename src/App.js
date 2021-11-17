@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.scss'
-import Login from './views/Login/Login';
+import AppRouter from './router/index';
 
 const App = () => {
     return (
         <div className="App">
-            <Login />
+            <AppRouter></AppRouter>
         </div>
     );
 };
