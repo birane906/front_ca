@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser, selectUser } from '../../store/slices/userSlice';
+import { setUser, selectUser, clearUser } from '../../store/slices/userSlice';
 import UserServiceApi from '../../services/api/userApiService';
 import { useHistory } from 'react-router';
 
@@ -17,6 +17,7 @@ const Home = () => {
             })
             .catch(error => {
                 console.warn(error);
+                dispatch(clearUser())
                 history.push('/')
             })
             // eslint-disable-next-line

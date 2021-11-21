@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUserMail } from '../../store/slices/userSlice';
+import { selectUser } from '../../store/slices/userSlice';
 import loginImg from '../../assets/images/login.svg'
 import JwtUtil from '../../utils/jwtUtil';
 import './LoginForm.scss'
@@ -13,13 +14,19 @@ const LoginForm = () => {
     const dispatch = useDispatch()
     const [mail, setMail] = useState("")
     const [password, setPassword] = useState("")
+    const user = useSelector(selectUser)
+
+    useEffect(() => {
+        if (user.mail) history.push('/home')
+        // eslint-disable-next-line
+    }, [])
 
     function onSubmit(event) {
         event.preventDefault()
         console.log("Posting datas", mail, password);
         AuthApiService.authenticate(mail, password)
             .then(token => {
-                const mail = JwtUtil.decodeFromHeader()?.sub
+                const mail = JwtUtil.decode(token)?.sub
                 dispatch(setUserMail(mail))
                 history.push('/home')
             })

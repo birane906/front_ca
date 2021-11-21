@@ -9,7 +9,6 @@ class AuthApiService {
            })
                .then(response => {
                    const token = response.data.jwt
-                   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
                    resolve(token)
                })
                .catch(e => reject(e))

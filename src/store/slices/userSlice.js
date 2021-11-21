@@ -9,13 +9,16 @@ export const userSlice = createSlice({
         setUser: (state, user) => {
             state.value = Object.assign(state.value, user.payload)
         },
+        clearUser: (state) => {
+            state.value = {}
+        },
         setUserMail: (state, mail) => {
             state.value = {...state.value, mail:mail.payload}
         },
     }
 })
 
-export const { setUser, setUserMail } = userSlice.actions
+export const { setUser, setUserMail, clearUser } = userSlice.actions
 
 export const selectUser = state => state.user.value
 
