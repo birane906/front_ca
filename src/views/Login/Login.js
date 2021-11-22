@@ -19,21 +19,23 @@ const Login = () => {
     const currentActive = isLogginActive ? "login" : "register";
 
     return (
-        <div className="login">
-            <div className="container">
-                {isLogginActive && (
-                    <LoginForm />
-                )}
-                {!isLogginActive && (
-                    <RegisterForm />
-                )}
+        <div className="loginWrapper">
+            <div className="login">
+                <div className="container">
+                    {isLogginActive && (
+                        <LoginForm />
+                    )}
+                    {!isLogginActive && (
+                        <RegisterForm />
+                    )}
+                </div>
+                <RightSide
+                    className={rightSideClass}
+                    current={current}
+                    currentActive={currentActive}
+                    onClick={changeState}
+                />
             </div>
-            <RightSide
-                className={rightSideClass}
-                current={current}
-                currentActive={currentActive}
-                onClick={changeState}
-            />
         </div>
     );
 };
