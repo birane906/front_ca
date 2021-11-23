@@ -9,7 +9,10 @@ const MenuCard = (props) => {
                 <Card.Title>{props.title}</Card.Title>
             </Card.Header>
             <Card.Body className="d-flex flex-column">
-                <Card.Img className="p-5" alt={`Menu Card ${props.title}`} src={props.imagesrc}></Card.Img>
+                {
+                    props.imagesrc &&
+                    <Card.Img className="p-5" alt={`Menu Card ${props.title}`} src={props.imagesrc}></Card.Img>
+                }
                 {props.children}
             </Card.Body>
         </Card>

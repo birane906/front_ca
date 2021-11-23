@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser, selectUser, clearUser } from '../../store/slices/userSlice';
 import UserServiceApi from '../../services/api/userApiService';
@@ -10,15 +10,18 @@ import logoutImage from '../../assets/images/logout.svg'
 import { Button, Row, Col } from 'react-bootstrap';
 import { MenuCard } from '../../components';
 import { Link } from 'react-router-dom';
+import CovidGouvService from '../../services/api/covidGouvService';
+import './Home.scss'
 
 const Home = () => {
     const user = useSelector(selectUser)
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const [covidData, setCovidData] = useState({})
+
     useEffect(() => {
         const mail = user.mail
-        console.log(process.env);
         if (process.env.REACT_APP_DEV === "1") {
             return dispatch(setUser({
                 mail: "mail@mail.com",
@@ -38,6 +41,14 @@ const Home = () => {
                 })
         }
         // eslint-disable-next-line
+    }, [])
+
+    useEffect(() => {
+        CovidGouvService.getLive()
+            .then(covidDataRes => {
+                setCovidData({...covidDataRes})
+            })
+            .catch(error => console.error(error))
     }, [])
 
     const logout = () => {
@@ -65,6 +76,30 @@ const Home = () => {
                 </Col>
             </Row>
             <Row className="justify-content-center">
+                <Col className="mb-3" xs={12} md={4} lg={3}>
+                    <MenuCard className="mx-auto text-decoration-none" title="Chiffres" onClick={() => window.location="https://www.gouvernement.fr/info-coronavirus"}>
+                        {
+                            !!covidData.reanimation ?
+                            <div className="mt-auto mb-auto d-flex flex-column align-items-center">
+                                <p className="infoHeader">Réanimation</p>
+                                <p>
+                                    <span className="infoNumber">
+                                        {covidData.reanimation} 
+                                    </span>
+                                    <span className={covidData.incidenceReanimation >= 0 ? "number number-pos" : "number number-neg"}>
+                                        {covidData.incidenceReanimation >= 0 ? "+" : "-"}{covidData.incidenceReanimation} (24h)
+                                    </span>
+                                </p>
+                                <hr></hr>
+                                <p className="infoHeader">Nouveaux cas</p>
+                                <p className="infoNumber">
+                                    + {covidData.nouveau24}
+                                </p>
+                            </div>
+                            : ""
+                        }
+                    </MenuCard>
+                </Col>
                 <Col className="mb-3" xs={12} md={4} lg={3}>
                     <MenuCard className="mx-auto text-decoration-none" title="Déconnexion" imagesrc={logoutImage} onClick={logout}>
                         <Button variant="danger" className="mt-auto mb-auto">Se déconnecter</Button>
