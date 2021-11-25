@@ -15,7 +15,7 @@ const Vaccine = () => {
         if (process.env.REACT_APP_DEV === "1") {
             const vaccin = {
                 id: 185618,
-                date: new Date(),
+                date: "02/12/2020",
                 dose: 1,
         
             }
