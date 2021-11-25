@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navbar } from '../components/index';
-import { Login, Home } from '../views/index';
+import { Login, Home, Vaccine, Tests } from '../views/index';
 import { selectUser } from '../store/slices/userSlice';
 import { useSelector } from 'react-redux';
 
@@ -17,6 +17,12 @@ const AppRouter = () => {
                     <Navbar user={`${user.first_name} ${user.last_name}`}></Navbar>
                     <Route path="/home">
                         <Home></Home>
+                    </Route>
+                    <Route path="/vaccins">
+                        <Vaccine></Vaccine>
+                    </Route>
+                    <Route path="/tests">
+                        <Tests></Tests>
                     </Route>
                 </Route> 
             </Switch>
