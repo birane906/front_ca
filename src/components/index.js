@@ -3,6 +3,7 @@ import RegisterForm from './RegisterForm/RegisterForm'
 import Navbar from './Navbar/Navbar'
 import MenuCard from './MenuCard/MenuCard'
 import DocumentCard from './DocumentCard/DocumentCard'
+import WebcamPopup from './WebcamPopup/WebcamPopup'
 
 export {
     LoginForm,
@@ -10,4 +11,5 @@ export {
     Navbar,
     MenuCard,
     DocumentCard,
+    WebcamPopup,
 }

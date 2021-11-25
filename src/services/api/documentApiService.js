@@ -20,6 +20,27 @@ class DocumentApiService {
                     })
                     .catch((error) => reject(error))
             })
+        },
+        addVaccine: (vaccine) => {
+            return new Promise((resolve, reject) => {
+                let payload = {
+                    id: vaccine.id,
+                    userId: vaccine.userId,
+                }
+                delete vaccine.id
+                delete vaccine.userId
+                payload = {...payload, content: JSON.stringify(vaccine)}
+                console.log("payload", payload);
+                axios.post("/api/vaccine-service/vaccines", payload)
+                    .then((response) => {
+                        const vaccine = response.data
+                        const content = JSON.parse(vaccine.content)
+                        delete vaccine.content
+                        delete vaccine.userId
+                        resolve({...vaccine, ...content})
+                    })
+                    .catch((error) => reject(error))
+            })
         }
     }
     static test = {
