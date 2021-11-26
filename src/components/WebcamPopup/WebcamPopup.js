@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Button, Row, Col } from 'react-bootstrap';
 import QrReader from 'react-qr-reader';
 import './WebcamPopup.scss'
@@ -10,7 +10,7 @@ const WebcamPopup = (props) => {
     const handleScan = data => {
         if (!data) return
         const dataObj = JSON.parse(data);
-        if (!"type" in dataObj) return
+        if (!("type" in dataObj)) return
         props.procesScan(dataObj)
     }
     const handleError = err => {
