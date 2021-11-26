@@ -33,6 +33,7 @@ const Vaccine = () => {
 
     const processVaccine = (dataObj) => {
         setShowModal(false)
+        if (dataObj.type !== "vaccine") return 
         delete dataObj.type
         setVaccine(dataObj)
         setShowValidation(true)
@@ -65,7 +66,7 @@ const Vaccine = () => {
                     vaccines.map(vaccine => {
                         return (
                             <Col className="mb-3 d-flex justify-content-center" key={vaccine.id} xs={12} md={4} lg={3}>
-                                <DocumentCard body={vaccine}></DocumentCard>
+                                <DocumentCard header="Vaccin" body={vaccine}></DocumentCard>
                             </Col>
                         )
                     })
@@ -79,7 +80,7 @@ const Vaccine = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="d-flex justify-content-center">
-                    <DocumentCard body={vaccine}></DocumentCard>
+                    <DocumentCard header="Vaccin" body={vaccine}></DocumentCard>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="success" onClick={addVaccine}>Ajouter</Button>

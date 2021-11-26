@@ -7,7 +7,7 @@ const DocumentCard = (props) => {
     return (
         <Card bg={props.bg} text={!props.bg ? 'dark' : 'white'}>
             <Card.Header>
-                Vaccin n°{body.id}
+                {props.header} n°{body.id}
             </Card.Header>
             <Card.Body>
                 <ul>

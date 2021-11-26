@@ -30,7 +30,6 @@ class DocumentApiService {
                 delete vaccine.id
                 delete vaccine.userId
                 payload = {...payload, content: JSON.stringify(vaccine)}
-                console.log("payload", payload);
                 axios.post("/api/vaccine-service/vaccines", payload)
                     .then((response) => {
                         const vaccine = response.data
@@ -46,7 +45,7 @@ class DocumentApiService {
     static test = {
         getByUserId: (id) => {
             return new Promise((resolve, reject) => {
-                axios.get("/api/test-service/vaccines", {
+                axios.get("/api/test-service/tests", {
                     params: {
                         userId: id
                     }
@@ -59,6 +58,29 @@ class DocumentApiService {
                             return {...test, ...content}
                         })
                         resolve(tests)
+                    })
+                    .catch((error) => reject(error))
+            })
+        },
+        addTest: (test) => {
+            return new Promise((resolve, reject) => {
+                let payload = {
+                    id: test.id,
+                    positive: test.positive,
+                    userId: test.userId,
+                }
+                delete test.id
+                delete test.positive
+                delete test.userId
+                payload = {...payload, content: JSON.stringify(test)}
+                console.log("payload", payload);
+                axios.post("/api/test-service/tests", payload)
+                    .then((response) => {
+                        const test = response.data
+                        const content = JSON.parse(test.content)
+                        delete test.content
+                        delete test.userId
+                        resolve({...test, ...content})
                     })
                     .catch((error) => reject(error))
             })
