@@ -20,7 +20,7 @@ const Navbar = (props) => {
                 <Nav.Toggle></Nav.Toggle>
                 <Nav.Collapse className="justify-content-end">
                     <Nav.Text>
-                        Connecté : {props.user}
+                        Connecté : <Link className="text-decoration-none text-nowrap" to="/profil">{props.user}</Link>
                     </Nav.Text>
                 </Nav.Collapse>
             </Container>
