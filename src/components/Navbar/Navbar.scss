@@ -1,0 +1,6 @@
+.status {
+    width: min-content;
+    & * {
+        white-space: nowrap;
+    }
+}

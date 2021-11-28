@@ -100,7 +100,7 @@ const Home = () => {
                                         {covidData.reanimation} 
                                     </span>
                                     <span className={covidData.incidenceReanimation >= 0 ? "number number-pos" : "number number-neg"}>
-                                        {covidData.incidenceReanimation >= 0 ? "+" : "-"}{covidData.incidenceReanimation} (24h)
+                                        {covidData.incidenceReanimation >= 0 ? "+" : ""}{covidData.incidenceReanimation} (24h)
                                     </span>
                                 </p>
                                 <hr></hr>
