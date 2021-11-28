@@ -8,7 +8,7 @@ class LocationApiService {
                     const longitude = position.coords.longitude
                     const latitude = position.coords.latitude
 
-                    axios.post("/api/locations-service/locations/publish", {
+                    axios.post("/api/location-service/locations/publish", {
                         longitude: longitude,
                         latitude: latitude,
                         email: mail,
